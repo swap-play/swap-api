@@ -32,7 +32,8 @@ export class UsersService {
       },
     });
 
-    return { email: user.email };
+    delete user.password;
+    return user;
   }
 
   async update(userId: string, userDto: UpdateUserDto) {
@@ -70,11 +71,13 @@ export class UsersService {
     return this.usersRepo.findUnique({
       where: { id: userId },
       select: {
+        id: true,
         name: true,
         email: true,
         gender: true,
         avatar: true,
         birthday: true,
+        address: true,
       },
     });
   }
