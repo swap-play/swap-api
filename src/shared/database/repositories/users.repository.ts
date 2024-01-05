@@ -10,6 +10,10 @@ export class UsersRepository {
     return this.prismaService.user.create(createDto);
   }
 
+  update(updateDto: Prisma.UserUpdateArgs) {
+    return this.prismaService.user.update(updateDto);
+  }
+
   findAll() {
     return this.prismaService.user.findMany();
   }
