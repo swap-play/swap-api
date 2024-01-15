@@ -7,6 +7,8 @@ import { AuthGuard } from './modules/auth/auth.guard';
 import { AddressModule } from './modules/address/address.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { storage } from 'src/shared/config/upload';
+import { GamesModule } from './modules/games/games.module';
+import { PlatformsModule } from './modules/platforms/platforms.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { storage } from 'src/shared/config/upload';
     DatabaseModule,
     AuthModule,
     AddressModule,
+    GamesModule,
+    PlatformsModule,
   ],
   controllers: [],
   providers: [
