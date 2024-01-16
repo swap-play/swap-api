@@ -62,9 +62,9 @@ model Game {
 model GamesOnPlatforms {
   id         String   @unique @default(uuid()) @db.Uuid
   platform   Platform @relation(fields: [platformId], references: [id])
-  platformId String   @unique @map("platform_id") @db.Uuid
+  platformId String   @map("platform_id") @db.Uuid
   game       Game     @relation(fields: [gameId], references: [id])
-  gameId     String   @unique @map("game_id") @db.Uuid
+  gameId     String   @map("game_id") @db.Uuid
 
   @@id([platformId, gameId])
   @@map("game_platform")

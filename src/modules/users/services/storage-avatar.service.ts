@@ -3,6 +3,7 @@ import { uploadsFolder } from 'src/shared/config/upload';
 import { resolve } from 'path';
 import { promises } from 'fs';
 
+// retirar esse service
 @Injectable()
 export class StorageAvatarService {
   async deleteFile(file: string) {

@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { GameDto } from './dto/game.dto';
 import { GamesRepository } from 'src/shared/database/repositories/games.repository';
+import { deleteUploadFile } from 'src/shared/utils/deleteUploadFile';
 
 @Injectable()
 export class GamesService {
@@ -18,7 +19,31 @@ export class GamesService {
     });
   }
 
-  // mudar formatacao
+  async updateImage(gameId: string, imageFilename: string) {
+    const game = await this.getGameById(gameId);
+
+    if (!game) {
+      throw new ConflictException('Unable to change game image.');
+    }
+
+    if (game.image) {
+      await deleteUploadFile(game.image);
+    }
+
+    return await this.gamesRepo.update({
+      where: { id: gameId },
+      data: { image: imageFilename },
+      select: { image: true },
+    });
+  }
+
+  getGameById(gameId: string) {
+    return this.gamesRepo.findUnique({
+      where: { id: gameId },
+    });
+  }
+
+  // mudar formatacao || RAW QUERY
   findAll() {
     return this.gamesRepo.findAll({
       include: { platforms: { include: { platform: true } } },
