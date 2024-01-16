@@ -10,7 +10,15 @@ export class GamesRepository {
     return this.prismaService.game.create(createDto);
   }
 
+  update(updateDto: Prisma.GameUpdateArgs) {
+    return this.prismaService.game.update(updateDto);
+  }
+
   findAll(findManyDto: Prisma.GameFindManyArgs) {
     return this.prismaService.game.findMany(findManyDto);
+  }
+
+  findUnique(findUniqueDto: Prisma.GameFindUniqueArgs) {
+    return this.prismaService.game.findUnique(findUniqueDto);
   }
 }
